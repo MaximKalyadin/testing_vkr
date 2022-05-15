@@ -13,30 +13,36 @@ def authorization():
     email = driver.find_element(by=By.ID, value='email')
     email.send_keys('kalyadin.maksim@mail.ru')
     password = driver.find_element(by=By.ID, value='password')
-    password.send_keys('42MAKS012530')
+    password.send_keys('')
     btn = driver.find_element(by=By.CLASS_NAME, value='auth-button')
     btn.click()
+    time.sleep(5)
 
 
 def call():
+    authorization()
     btn_toggle_contact = driver.find_element(by=By.CLASS_NAME, value='button-toggle-contact')
     btn_toggle_contact.click()
     time.sleep(2)
     btn_call = driver.find_elements(by=By.ID, value='call')[0]
     btn_call.click()
+    time.sleep(5)
 
 
 def stop_call():
+    call()
     btn_call_stop = driver.find_element(by=By.ID, value='stop_call')
     btn_call_stop.click()
 
 
 def select_new_video():
+    authorization()
     video = driver.find_elements(by=By.CLASS_NAME, value='preview')[1]
     video.click()
 
 
 def open_panel_setting():
+    authorization()
     btn_toggle_contact = driver.find_element(by=By.CLASS_NAME, value='button-toggle-settings')
     btn_toggle_contact.click()
     time.sleep(2)
@@ -48,6 +54,10 @@ def open_panel_setting():
 
 
 def repeat_call():
+    authorization()
+    btn_toggle_contact = driver.find_element(by=By.CLASS_NAME, value='button-toggle-settings')
+    btn_toggle_contact.click()
+    time.sleep(2)
     label_tab_2 = driver.find_element(by=By.ID, value='calls')
     label_tab_2.click()
     btn_update = driver.find_element(by=By.ID, value='update')
@@ -55,6 +65,8 @@ def repeat_call():
     time.sleep(5)
     btn_call = driver.find_element(by=By.ID, value='call_repeat')
     btn_call.click()
+    time.sleep(5)
+    repeat_call_stop()
 
 
 def repeat_call_stop():
@@ -63,6 +75,7 @@ def repeat_call_stop():
 
 
 def logout():
+    authorization()
     btn_toggle_contact = driver.find_element(by=By.CLASS_NAME, value='button-toggle-settings')
     btn_toggle_contact.click()
     time.sleep(2)
@@ -104,12 +117,3 @@ def mute_input():
     btn_inp = driver.find_element(by=By.ID, value='volume_input')
     btn_inp.click()
 
-
-time.sleep(5)
-authorization()
-time.sleep(5)
-mute_output()
-time.sleep(5)
-mute_input()
-
-time.sleep(12222)
